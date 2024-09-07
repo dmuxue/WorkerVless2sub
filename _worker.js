@@ -326,7 +326,7 @@ export default {
 				uuid = env.UUID || "null";
 			}
 			
-			path = env.PATH || "/?ed=2560";
+			path = env.PATH || "";
 			sni = env.SNI || host;
 			type = env.TYPE || type;
 			edgetunnel = env.ED || edgetunnel;
@@ -412,7 +412,7 @@ export default {
 			}
 			
 			if (!path || path.trim() === '') {
-				path = '/?ed=2560';
+				path = '';
 			} else {
 				// 如果第一个字符不是斜杠，则在前面添加一个斜杠
 				path = (path[0] === '/') ? path : '/' + path;
@@ -645,7 +645,7 @@ export default {
 
 					return trojanLink;
 				} else {
-					const vlessLink = `vless://${uuid}@${address}:${port}?encryption=none&security=tls&sni=${sni}&alpn=h3&fp=random&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径)}#${encodeURIComponent(addressid + 节点备注)}`;
+					const vlessLink = `vless://${uuid}@${address}:${port}?encryption=none&security=tls&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径)}#${encodeURIComponent(addressid + 节点备注)}`;
 			
 					return vlessLink;
 				}
@@ -728,7 +728,7 @@ function surge(content, url) {
 		if (x.includes('= trojan,')) {
 			const host = x.split("sni=")[1].split(",")[0];
 			const 备改内容 = `skip-cert-verify=true, tfo=false, udp-relay=false`;
-			const 正确内容 = `skip-cert-verify=true, ws=true, ws-path=/?ed=2560, ws-headers=Host:"${host}", tfo=false, udp-relay=false`;
+			const 正确内容 = `skip-cert-verify=true, ws=true, ws-path=, ws-headers=Host:"${host}", tfo=false, udp-relay=false`;
 			输出内容 += x.replace(new RegExp(备改内容, 'g'), 正确内容).replace("[", "").replace("]", "") + '\n';
 		} else {
 			输出内容 += x + '\n';
